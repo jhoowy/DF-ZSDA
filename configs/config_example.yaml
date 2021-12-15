@@ -1,0 +1,35 @@
+train:
+    name: EFGC  # Experiment result folder name
+    batch_size: 64  # Batch size for a each task
+    checkpoints_dir: ./checkpoints  #  Root result directory
+    gpu_ids: [0]    # GPU ids: e.g. [0] [0,1,2]. use [] for CPU
+    epoch_count: 1
+    n_epochs: 100   # Number of epochs
+    save_weight: true   # Do not save model parameter when set to false
+
+dataset:
+    data_root: ./data   # Path to root data directory
+    rt_data: EMNIST # ToI dataset name [MNIST | FashionMNIST | EMNIST]
+    irt_data: FashionMNIST  # IrT dataset name [MNIST | FashionMNIST | EMNIST]
+    s_domain: G # Source domain [G | C | E | N]
+    t_domain: C # Target domain [G | C | E | N]
+    rt_classes: 27  # Number of classes in ToI
+    irt_classes: 10 # Number of classes in IrT
+    img_size: 28    # Input image size
+    workers: 8  # Number of workers for dataloader
+    match_sampling: true    # Enable class-matching batch sampling method 
+
+optimizer:
+    lr: 0.0002  # Initial learning rate for adam optimizer
+    lr_policy: step
+    lr_decay_iters: 30  # Multiply by a gamma every lr_decay_iters iterations
+    n_epochs_decay: 30  # Number of epochs to linearly decay learning rate to zero
+    beta1: 0.5  # Momentum term of adam
+
+logger:
+    print_loss: false   # Whether show loss
+    print_freq: 500 # Frequency of showing loss
+
+models:
+    FS: SA
+    FS_n_layers: 2
